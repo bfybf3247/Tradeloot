@@ -1,6 +1,5 @@
 package net.bfybf.tradeloot.event;
 
-import com.google.errorprone.annotations.Var;
 import net.bfybf.tradeloot.config.CommonConfig;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.damagesource.DamageSource;
