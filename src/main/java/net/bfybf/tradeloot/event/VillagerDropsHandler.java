@@ -24,16 +24,16 @@ public class VillagerDropsHandler {
     @SubscribeEvent
     public static void onMobDropsLoot(LivingDropsEvent event) {
         if (CommonConfig.EnableVillagerDrops()) {
-            LivingEntity entity = event.getEntity();
-            DamageSource source = event.getSource();
-            Level level = entity.level();
+            final LivingEntity entity = event.getEntity();
+            final DamageSource source = event.getSource();
+            final Level level = entity.level();
             if (level.getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
-                Entity killer = source.getEntity();
+                final Entity killer = source.getEntity();
                 if (!(killer instanceof  Player) && CommonConfig.RequirePlayer()){
                     return;
                 }
                 if (entity instanceof AbstractVillager villager && !entity.isBaby()) {
-                    MerchantOffers offers = villager.getOffers();
+                    final MerchantOffers offers = villager.getOffers();
                     int villagerlevel = 1;
                     SimpleContainer villagerinventory = null;
                     if (villager instanceof Villager realvillager) {
@@ -53,14 +53,21 @@ public class VillagerDropsHandler {
                         }
                     }
 
-                    if (CommonConfig.DropInventory() && villager instanceof Villager){
+                    if (CommonConfig.InvDropsChance() > 0.0 && villager instanceof Villager){
                         for(ItemStack inv : villagerinventory.removeAllItems()){
-                            if(level.random.nextDouble() < CommonConfig.InvDropsChance())
+                            int invCount = inv.getCount();
+                            int amount = 0;
+                            for(int i=0 ;i < invCount; i++)
                             {
-                                event.getDrops().add(new ItemEntity(level, villager.getOnPos().getX(), villager.getOnPos().getY(), villager.getOnPos().getZ(), inv));
+                                if(level.random.nextDouble() < CommonConfig.InvDropsChance()){
+                                    amount++;
+                                }
                             }
+                            inv.setCount(amount);
+                            event.getDrops().add(new ItemEntity(level, villager.getOnPos().getX(), villager.getOnPos().getY(), villager.getOnPos().getZ(), inv));
                         }
                     }
+
                 }
             }
         }

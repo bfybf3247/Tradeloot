@@ -2,8 +2,10 @@
   "required": true,
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
+  "package": "net.bfybf.tradeloot.mixin",
   "refmap": "tradeloot.refmap.json",
   "mixins": [
+    "VillagerMixin"
   ],
   "client": [
   ],

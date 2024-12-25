@@ -16,7 +16,7 @@ public class CommonConfig {
 
     private static ForgeConfigSpec.IntValue drops_number;
 
-    private static ForgeConfigSpec.BooleanValue drop_inventory;
+    private static ForgeConfigSpec.BooleanValue add_inventory;
 
     private static ForgeConfigSpec.DoubleValue inv_drops_chance;
 
@@ -40,8 +40,8 @@ public class CommonConfig {
         return drops_number.get();
     }
 
-    public static boolean DropInventory(){
-        return drop_inventory.get();
+    public static boolean AddInventory(){
+        return add_inventory.get();
     }
 
     public static double InvDropsChance() {
@@ -63,7 +63,7 @@ public class CommonConfig {
 
         drops_number = builder.comment("The maximum number of drops of each villager level adds. Set '0' as infinite.").defineInRange("drops-number", 2, 0, 2147483647);
 
-        drop_inventory = builder.comment("Should villager drop their inventory.").define("enable-inventory-drops", false);
+        add_inventory = builder.comment("Whether add costed item to villager's inventory after trade.").define("enable-add-drops", true);
 
         inv_drops_chance = builder.comment("The chance should villager drop their inventory.").defineInRange("inv-drops-chance",0.5,0,1);
 
