@@ -7,5 +7,5 @@ Villagers now drop their trades and inventory(configurable).<br/>
 - The basic chance should villager drop.
 - The additional chance bonus that one level of looting adds.
 - The maximum number of drops of each villager level adds.
-- Should villager drop their inventory.
+- Whether add costed item to villager's inventory after trade..
 - The chance should villager drop their inventory.
