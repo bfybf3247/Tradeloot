@@ -46,7 +46,7 @@ public class VillagerDropsHandler {
                             if(CommonConfig.DropsNumber() == 0 || drops < villagerlevel * CommonConfig.DropsNumber()) {
                                 ItemStack itemStack = offer.getResult().copy();
                                 if(!itemStack.is(NOTARDELOOT)) {
-                                    event.getDrops().add(new ItemEntity(level, villager.getOnPos().getX(), villager.getOnPos().getY(), villager.getOnPos().getZ(), itemStack));
+                                    event.getDrops().add(new ItemEntity(level, villager.getOnPos().getX(), villager.getOnPos().getY() + 1, villager.getOnPos().getZ(), itemStack));
                                     drops += 1;
                                 }
                             }
@@ -64,7 +64,7 @@ public class VillagerDropsHandler {
                                 }
                             }
                             inv.setCount(amount);
-                            event.getDrops().add(new ItemEntity(level, villager.getOnPos().getX(), villager.getOnPos().getY(), villager.getOnPos().getZ(), inv));
+                            event.getDrops().add(new ItemEntity(level, villager.getOnPos().getX(), villager.getOnPos().getY() + 1, villager.getOnPos().getZ(), inv));
                         }
                     }
 
