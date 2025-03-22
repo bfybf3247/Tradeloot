@@ -19,6 +19,7 @@ public final class TradelootForge {
         Tradeloot.init();
         ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, () -> new ConfigScreenHandler.ConfigScreenFactory((client, parent) -> {
             return ClothScreen.getConfigScreen(parent);
-        }));}
+        }));
+    }
 
 }

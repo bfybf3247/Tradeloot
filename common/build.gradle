@@ -10,8 +10,9 @@ dependencies {
 
     modImplementation "dev.architectury:architectury:$rootProject.architectury_api_version"
 
-    modApi("me.shedaniel.cloth:cloth-config-fabric:$rootProject.cloth_version") {
+    modImplementation("me.shedaniel.cloth:cloth-config-fabric:$rootProject.cloth_version") {
         exclude(group: "net.fabricmc.fabric-api")
     }
+
 
 }

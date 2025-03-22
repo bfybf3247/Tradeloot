@@ -23,7 +23,7 @@ import static net.bfybf.tradeloot.Tradeloot.NOTARDELOOT;
 public class VillagerDeathEvent {
     public VillagerDeathEvent(){
         EntityEvent.LIVING_DEATH.register((entity, source) -> {
-            final Level level = entity.level();
+            final Level level = entity.getLevel();
             if(level.getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT) && Config.enableVillagerDrops)
             {
                 final LivingEntity killer = (LivingEntity) source.getEntity();
