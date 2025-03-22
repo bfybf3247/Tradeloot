@@ -3,12 +3,10 @@ package net.bfybf.tradeloot.forge;
 import net.bfybf.tradeloot.Tradeloot;
 import dev.architectury.platform.forge.EventBuses;
 import net.bfybf.tradeloot.config.ClothScreen;
-import net.minecraftforge.client.ConfigScreenHandler;
-import net.minecraftforge.fml.IExtensionPoint;
+import net.minecraftforge.client.ConfigGuiHandler;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.network.NetworkConstants;
 
 @Mod(Tradeloot.MOD_ID)
 public final class TradelootForge {
@@ -17,7 +15,7 @@ public final class TradelootForge {
         EventBuses.registerModEventBus(Tradeloot.MOD_ID, FMLJavaModLoadingContext.get().getModEventBus());
         Tradeloot.register();
         Tradeloot.init();
-        ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, () -> new ConfigScreenHandler.ConfigScreenFactory((client, parent) -> {
+        ModLoadingContext.get().registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory.class, () -> new ConfigGuiHandler.ConfigGuiFactory((client, parent) -> {
             return ClothScreen.getConfigScreen(parent);
         }));
     }

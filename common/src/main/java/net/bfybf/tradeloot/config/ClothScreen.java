@@ -4,7 +4,7 @@ import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 
 public class ClothScreen {
 
@@ -12,53 +12,53 @@ public class ClothScreen {
     public static Screen getConfigScreen(Screen parent) {
         ConfigBuilder builder = ConfigBuilder.create()
                 .setParentScreen(parent)
-                .setTitle(Component.translatable("config.tradeloot.title"));
+                .setTitle(new TranslatableComponent("config.tradeloot.title"));
 
         builder.setSavingRunnable(Config::saveConfig);
 
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
-        ConfigCategory general = builder.getOrCreateCategory(Component.translatable("config.tradeloot.general"));
+        ConfigCategory general = builder.getOrCreateCategory(new TranslatableComponent("config.tradeloot.general"));
 
-        general.addEntry(entryBuilder.startBooleanToggle(Component.translatable("config.tradeloot.enable_villager_drops"), Config.enableVillagerDrops)
+        general.addEntry(entryBuilder.startBooleanToggle(new TranslatableComponent("config.tradeloot.enable_villager_drops"), Config.enableVillagerDrops)
                 .setDefaultValue(true)
                 .setSaveConsumer(value -> Config.enableVillagerDrops = value)
                 .build());
 
-        general.addEntry(entryBuilder.startBooleanToggle(Component.translatable("config.tradeloot.require_player"), Config.requirePlayer)
+        general.addEntry(entryBuilder.startBooleanToggle(new TranslatableComponent("config.tradeloot.require_player"), Config.requirePlayer)
                 .setDefaultValue(true)
                 .setSaveConsumer(value -> Config.requirePlayer = value)
-                .setTooltip(Component.translatable("config.tradeloot.require_player.tooltip"))
+                .setTooltip(new TranslatableComponent("config.tradeloot.require_player.tooltip"))
                 .build());
 
-        general.addEntry(entryBuilder.startDoubleField(Component.translatable("config.tradeloot.drops_chance"), Config.dropsChance)
+        general.addEntry(entryBuilder.startDoubleField(new TranslatableComponent("config.tradeloot.drops_chance"), Config.dropsChance)
                 .setDefaultValue(0.25)
                 .setSaveConsumer(value -> Config.dropsChance = value)
-                .setTooltip(Component.translatable("config.tradeloot.drops_chance.tooltip"))
+                .setTooltip(new TranslatableComponent("config.tradeloot.drops_chance.tooltip"))
                 .build());
 
-        general.addEntry(entryBuilder.startDoubleField(Component.translatable("config.tradeloot.looting_Bonus"), Config.lootingBonus)
+        general.addEntry(entryBuilder.startDoubleField(new TranslatableComponent("config.tradeloot.looting_Bonus"), Config.lootingBonus)
                 .setDefaultValue(0.15)
                 .setSaveConsumer(value -> Config.lootingBonus = value)
-                .setTooltip(Component.translatable("config.tradeloot.looting_Bonus.tooltip"))
+                .setTooltip(new TranslatableComponent("config.tradeloot.looting_Bonus.tooltip"))
                 .build());
 
-        general.addEntry(entryBuilder.startIntField(Component.translatable("config.tradeloot.dropsNumber"), Config.dropsNumber)
+        general.addEntry(entryBuilder.startIntField(new TranslatableComponent("config.tradeloot.dropsNumber"), Config.dropsNumber)
                 .setDefaultValue(2)
                 .setSaveConsumer(value -> Config.dropsNumber = value)
-                .setTooltip(Component.translatable("config.tradeloot.dropsNumber.tooltip"))
+                .setTooltip(new TranslatableComponent("config.tradeloot.dropsNumber.tooltip"))
                 .build());
 
-        general.addEntry(entryBuilder.startBooleanToggle(Component.translatable("config.tradeloot.add_Inventory"), Config.addInventory)
+        general.addEntry(entryBuilder.startBooleanToggle(new TranslatableComponent("config.tradeloot.add_Inventory"), Config.addInventory)
                 .setDefaultValue(false)
                 .setSaveConsumer(value -> Config.addInventory = value)
-                .setTooltip(Component.translatable("config.tradeloot.add_Inventory.tooltip"))
+                .setTooltip(new TranslatableComponent("config.tradeloot.add_Inventory.tooltip"))
                 .build());
 
-        general.addEntry(entryBuilder.startDoubleField(Component.translatable("config.tradeloot.invDrops_Chance"), Config.invDropsChance)
+        general.addEntry(entryBuilder.startDoubleField(new TranslatableComponent("config.tradeloot.invDrops_Chance"), Config.invDropsChance)
                 .setDefaultValue(0.25)
                 .setSaveConsumer(value -> Config.invDropsChance = value)
-                .setTooltip(Component.translatable("config.tradeloot.invDrops_Chance.tooltip"))
+                .setTooltip(new TranslatableComponent("config.tradeloot.invDrops_Chance.tooltip"))
                 .build());
 
         return builder.build();
