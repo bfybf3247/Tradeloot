@@ -1,11 +1,16 @@
 # Tradeloot
-This mod enable villagers to drop loots when they are killed. <br/>
-Villagers now drop their trades and inventory(configurable).<br/>
+Enables villagers to drop loot upon death, including their trades and inventory (configurable).
 
-### Configurable Settings
-- Required player to drop items.
-- The basic chance should villager drop.
-- The additional chance bonus that one level of looting adds.
-- The maximum number of drops of each villager level adds.
-- Whether add costed item to villager's inventory after trade..
-- The chance should villager drop their inventory.
+### Configurable Features
+- **Require Player**: Drops only if killed by a player.
+- **Base Drop Chance**: Initial chance for villagers to drop items.
+- **Looting Bonus**: Additional drop chance per level of Looting enchantment.
+- **Max Drops per Level**: Maximum drops added per villager level (set to 0 for unlimited).
+- **Add to Inventory**: Include traded items in the villager's inventory after trading.
+- **Inventory Drop Chance**: Chance for villagers to drop items from their inventory.
+- **Exclusion Tag**: Items with the "tradeloot:prevent_tradeloot" tag are excluded from drops.
+
+### Requires
+- Architectury API
+- Cloth Config API
+- Mod Menu (optional)
