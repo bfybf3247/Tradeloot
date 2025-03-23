@@ -38,7 +38,7 @@ public class ClothScreen {
                 .build());
 
         general.addEntry(entryBuilder.startDoubleField(Component.translatable("config.tradeloot.looting_Bonus"), Config.lootingBonus)
-                .setDefaultValue(0.15)
+                .setDefaultValue(0.05)
                 .setSaveConsumer(value -> Config.lootingBonus = value)
                 .setTooltip(Component.translatable("config.tradeloot.looting_Bonus.tooltip"))
                 .build());
@@ -47,6 +47,12 @@ public class ClothScreen {
                 .setDefaultValue(2)
                 .setSaveConsumer(value -> Config.dropsNumber = value)
                 .setTooltip(Component.translatable("config.tradeloot.dropsNumber.tooltip"))
+                .build());
+
+        general.addEntry(entryBuilder.startIntField(Component.translatable("config.tradeloot.dropsBonus"), Config.dropsBonus)
+                .setDefaultValue(1)
+                .setSaveConsumer(value -> Config.dropsBonus = value)
+                .setTooltip(Component.translatable("config.tradeloot.dropsBonus.tooltip"))
                 .build());
 
         general.addEntry(entryBuilder.startBooleanToggle(Component.translatable("config.tradeloot.add_Inventory"), Config.addInventory)
@@ -59,6 +65,11 @@ public class ClothScreen {
                 .setDefaultValue(0.25)
                 .setSaveConsumer(value -> Config.invDropsChance = value)
                 .setTooltip(Component.translatable("config.tradeloot.invDrops_Chance.tooltip"))
+                .build());
+
+        general.addEntry(entryBuilder.startDoubleField(Component.translatable("config.tradeloot.PotatoChance"), Config.PotatoChance)
+                .setDefaultValue(0.0001)
+                .setSaveConsumer(value -> Config.PotatoChance = value)
                 .build());
 
         return builder.build();
