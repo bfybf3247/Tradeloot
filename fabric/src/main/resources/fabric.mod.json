@@ -17,9 +17,6 @@
     "main": [
       "net.bfybf.tradeloot.fabric.TradelootFabric"
     ],
-    "client": [
-      "net.bfybf.tradeloot.fabric.client.TradelootFabricClient"
-    ],
     "modmenu": [
       "net.bfybf.tradeloot.fabric.ModMenuFabric"
     ]

@@ -6,12 +6,15 @@
   "config.tradeloot.drops_chance": "Drops Chance",
   "config.tradeloot.looting_Bonus": "Looting Bonus",
   "config.tradeloot.dropsNumber": "Drops Number",
+  "config.tradeloot.dropsBonus": "Looting Drops Number Bonus",
   "config.tradeloot.add_Inventory": "Add to Inventory",
   "config.tradeloot.invDrops_Chance": "Inventory Drops Chance",
   "config.tradeloot.require_player.tooltip": "Require player kill for drops.",
   "config.tradeloot.drops_chance.tooltip": "Drops chance of each slot.(Item with 'tradeloot:prevent_tradeloot' tag do not drop as trade item)",
   "config.tradeloot.looting_Bonus.tooltip": "Chance bonus for each looting enchant level",
+  "config.tradeloot.dropsBonus.tooltip": "Max drops number bonus for each looting enchant level",
   "config.tradeloot.dropsNumber.tooltip": "Max drops number of each villager level adds (Set '0' as infinity)",
   "config.tradeloot.add_Inventory.tooltip": "Add costed items to villager's inventory after each trade",
-  "config.tradeloot.invDrops_Chance.tooltip": "Drops chance of item amount of villager's inventory "
+  "config.tradeloot.invDrops_Chance.tooltip": "Drops chance of item amount of villager's inventory ",
+  "config.tradeloot.PotatoChance": "PotatoChance"
 }

@@ -3,14 +3,18 @@ package net.bfybf.tradeloot.event;
 import dev.architectury.event.EventResult;
 import dev.architectury.event.events.common.EntityEvent;
 import net.bfybf.tradeloot.config.Config;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.trading.MerchantOffer;
@@ -30,14 +34,14 @@ public class VillagerDeathEvent {
                 if (!(killer instanceof Player) && Config.requirePlayer){
                     return EventResult.interruptDefault();
                 }
-                if(entity instanceof AbstractVillager villager && !entity.isBaby()){
+                if(entity instanceof AbstractVillager villager){
 
                     final MerchantOffers offers = villager.getOffers();
                     int villagerlevel = 1;
                     int drops = 0;
                     int lootinglevel = 0;
                     if (killer != null) {
-                        lootinglevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.MOB_LOOTING, killer.getMainHandItem());
+                        lootinglevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.LOOTING, killer.getMainHandItem());
                     }
 
                     SimpleContainer villagerinventory = null;
@@ -62,13 +66,22 @@ public class VillagerDeathEvent {
                                 drops += 1;
                             }
                         }
+
+                        if(realvillager.getVillagerData().getProfession() == VillagerProfession.NITWIT){
+                            if (level.random.nextDouble() < Config.PotatoChance){
+                                ItemStack potato = new ItemStack(Items.POTATO,1 );
+                                potato.set(DataComponents.CUSTOM_NAME, Component.translatable("item.minecraft.apple"));
+                                ItemEntity apple = new ItemEntity(level, entity.getX(), entity.getY() + 1, entity.getZ(),potato);
+                                apple.setCustomName(Component.translatable("item.minecraft.apple"));
+                                apple.setCustomNameVisible(true);
+                                level.addFreshEntity(apple);
+                            }
+                        }
                     }
 
-
-                    
                     for(MerchantOffer offer : offers){
                         if (!offer.isOutOfStock() && level.random.nextDouble() < Math.min(Config.dropsChance + lootinglevel * Config.lootingBonus , 1)) {
-                            if(Config.dropsNumber == 0 || drops < villagerlevel * Config.dropsNumber) {
+                            if(Config.dropsNumber == 0 || drops < villagerlevel * Config.dropsNumber + lootinglevel * Config.dropsBonus) {
                                 ItemStack itemStack = offer.getResult().copy();
                                 if(!itemStack.is(NOTARDELOOT)){
                                     ItemEntity itemEntity = new ItemEntity(level, entity.getX(), entity.getY() + 1, entity.getZ(), itemStack);
