@@ -5,13 +5,13 @@ import dev.architectury.event.events.common.EntityEvent;
 import net.bfybf.tradeloot.config.Config;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -27,13 +27,12 @@ public class VillagerDeathEvent {
     public VillagerDeathEvent(){
         EntityEvent.LIVING_DEATH.register((entity, source) -> {
             final Level level = entity.level();
-            if(level.getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT) && Config.enableVillagerDrops)
-            {
+            if(level.getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT) && Config.enableVillagerDrops) {
                 final LivingEntity killer = (LivingEntity) source.getEntity();
-                if (!(killer instanceof Player) && Config.requirePlayer){
+                if (!(killer instanceof Player) && Config.requirePlayer) {
                     return EventResult.interruptDefault();
                 }
-                if(entity instanceof AbstractVillager villager){
+                if (entity instanceof AbstractVillager villager) {
 
                     final MerchantOffers offers = villager.getOffers();
                     int villagerlevel = 1;
@@ -43,59 +42,88 @@ public class VillagerDeathEvent {
                         lootinglevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.MOB_LOOTING, killer.getMainHandItem());
                     }
 
-                    SimpleContainer villagerinventory = null;
-
                     if (villager instanceof Villager realvillager) {
                         villagerlevel = realvillager.getVillagerData().getLevel();
-                        villagerinventory = realvillager.getInventory();
+                        SimpleContainer villagerinventory = realvillager.getInventory();
 
-                        if (Config.invDropsChance > 0.0){
-                            for(ItemStack inventory : villagerinventory.removeAllItems()){
+                        if (Config.invDropsChance > 0.0) {
+                            for (ItemStack inventory : villagerinventory.removeAllItems()) {
                                 int invCount = inventory.getCount();
+                                if(invCount <= 0) continue;
                                 int amount = 0;
-                                for(int i=0 ;i < invCount; i++)
-                                {
-                                    if(level.random.nextDouble() < Config.invDropsChance){
+                                for (int i = 0; i < invCount; i++) {
+                                    if (level.random.nextDouble() < Config.invDropsChance) {
                                         amount++;
                                     }
                                 }
-                                inventory.setCount(amount);
-                                ItemEntity itemEntity = new ItemEntity(level, entity.getX(), entity.getY() + 1, entity.getZ(), inventory);
-                                level.addFreshEntity(itemEntity);
-                                drops += 1;
+                                if(amount > 0)
+                                {
+                                    inventory.setCount(amount);
+                                    ItemEntity itemEntity = new ItemEntity(level, entity.getX(), entity.getY() + 1, entity.getZ(), inventory);
+                                    level.addFreshEntity(itemEntity);
+                                }
                             }
                         }
-                        if(realvillager.getVillagerData().getProfession() == VillagerProfession.NITWIT){
-                            if (level.random.nextDouble() < Config.PotatoChance){
-                                ItemStack potato = new ItemStack(Items.POTATO,1 );
-                                potato.setHoverName(Component.translatable("item.minecraft.apple"));
-                                ItemEntity apple = new ItemEntity(level, entity.getX(), entity.getY() + 1, entity.getZ(),potato);
-                                apple.setCustomName(Component.translatable("item.minecraft.apple"));
+
+                        if (realvillager.getVillagerData().getProfession() == VillagerProfession.NITWIT && killer instanceof Player) {
+                            if (level.random.nextDouble() < Config.PotatoChance) {
+                                Item[] potatos = {
+                                        Items.POTATO,
+                                        Items.POISONOUS_POTATO,
+                                        Items.PUFFERFISH,
+                                        Items.ROTTEN_FLESH,
+                                        Items.SPIDER_EYE,
+                                        Items.DIORITE,
+                                        Items.LEAD,
+                                        Items.BOOK,
+                                        Items.KNOWLEDGE_BOOK,
+                                        Items.NETHERITE_INGOT
+                                };
+                                String[] apples = {
+                                        "item.minecraft.apple",
+                                        "item.minecraft.golden_apple",
+                                        "item.minecraft.enchanted_golden_apple",
+                                        "item.minecraft.cooked_beef",
+                                        "item.minecraft.ender_eye",
+                                        "block.minecraft.diorite",
+                                        "entity.minecraft.wandering_trader",
+                                        "enchantment.minecraft.mending",
+                                        "lectern.take_book",
+                                        "item.minecraft.nether_brick"
+                                };
+                                int seed = level.random.nextInt(potatos.length);
+                                ItemStack potato = new ItemStack(potatos[seed], 1);
+                                potato.setHoverName(Component.translatable(apples[seed]));
+                                ItemEntity apple = new ItemEntity(level, entity.getX(), entity.getY() + 1, entity.getZ(), potato);
+                                apple.setCustomName(apple.getItem().getHoverName());
                                 apple.setCustomNameVisible(true);
                                 level.addFreshEntity(apple);
                             }
                         }
                     }
 
+                    int bonusdrop = lootinglevel * Config.dropsBonus;
+                    double dropChance = Math.min(Config.dropsChance + lootinglevel * Config.lootingBonus, 1);
 
-                    
-                    for(MerchantOffer offer : offers){
-                        if (!offer.isOutOfStock() && level.random.nextDouble() < Math.min(Config.dropsChance + lootinglevel * Config.lootingBonus , 1)) {
-                            if(Config.dropsNumber == 0 || drops < villagerlevel * Config.dropsNumber + lootinglevel * Config.dropsBonus) {                                ItemStack itemStack = offer.getResult().copy();
-                                if(!itemStack.is(NOTARDELOOT)){
-                                    ItemEntity itemEntity = new ItemEntity(level, entity.getX(), entity.getY() + 1, entity.getZ(), itemStack);
-                                    level.addFreshEntity(itemEntity);
-                                    drops += 1;
-                                }
+                    for (MerchantOffer offer : offers) {
+                        ItemStack itemStack = offer.getResult().copy();
+                        if (offer.isOutOfStock() || itemStack.is(NOTARDELOOT)) continue;
+                        if (Config.dropsNumber == 0 || drops < villagerlevel * Config.dropsNumber) {
+                            if (level.random.nextDouble() < dropChance) {
+                                ItemEntity itemEntity = new ItemEntity(level, entity.getX(), entity.getY() + 1, entity.getZ(), itemStack);
+                                level.addFreshEntity(itemEntity);
+                                drops += 1;
                             }
                         }
+                        if(bonusdrop > 0 && level.random.nextDouble() < dropChance){
+                            ItemEntity itemEntity = new ItemEntity(level, entity.getX(), entity.getY() + 1, entity.getZ(), itemStack);
+                            level.addFreshEntity(itemEntity);
+                            bonusdrop -= 1;
+                        }
                     }
+
                 }
             }
-
-
-
-
             return EventResult.interruptDefault();
         });
     }

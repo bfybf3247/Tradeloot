@@ -23,7 +23,5 @@ public final class Tradeloot {
     public static void register(){
         configFile  = new File(Platform.getConfigFolder().toFile(), "tradeloot.properties");
         loadConfig(configFile);
-
-
     }
 }

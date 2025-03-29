@@ -8,10 +8,8 @@ modId = "tradeloot"
 version = "${version}"
 displayName = "tradeloot"
 logoFile = "icon.png"
-authors = ""
-description = '''
-
-'''
+authors = "Bfybf"
+description = "Allow villagers to drop their trade items"
 
 [[dependencies.tradeloot]]
 modId = "forge"

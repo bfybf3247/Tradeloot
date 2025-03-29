@@ -29,7 +29,7 @@ public class Config {
             dropsNumber = Integer.parseInt(props.getProperty("dropsNumber", "2"));
             addInventory = Boolean.parseBoolean(props.getProperty("addInventory", "false"));
             invDropsChance = Double.parseDouble(props.getProperty("invDropsChance", "0.25"));
-            PotatoChance = Double.parseDouble(props.getProperty("potatoChance", "0.0001"));
+            PotatoChance = Double.parseDouble(props.getProperty("potatoChance", "0.02"));
 
         } catch (IOException e) {
             saveConfig();
