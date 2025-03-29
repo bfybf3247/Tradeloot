@@ -68,7 +68,7 @@ public class ClothScreen {
                 .build());
 
         general.addEntry(entryBuilder.startDoubleField(Component.translatable("config.tradeloot.PotatoChance"), Config.PotatoChance)
-                .setDefaultValue(0.0001)
+                .setDefaultValue(0.002)
                 .setSaveConsumer(value -> Config.PotatoChance = value)
                 .build());
 

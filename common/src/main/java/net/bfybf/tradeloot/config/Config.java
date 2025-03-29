@@ -1,7 +1,5 @@
 package net.bfybf.tradeloot.config;
 
-import dev.architectury.platform.Platform;
-
 import java.io.*;
 import java.util.Properties;
 
@@ -31,7 +29,7 @@ public class Config {
             dropsNumber = Integer.parseInt(props.getProperty("dropsNumber", "2"));
             addInventory = Boolean.parseBoolean(props.getProperty("addInventory", "false"));
             invDropsChance = Double.parseDouble(props.getProperty("invDropsChance", "0.25"));
-            PotatoChance = Double.parseDouble(props.getProperty("potatoChance", "0.0001"));
+            PotatoChance = Double.parseDouble(props.getProperty("potatoChance", "0.002"));
 
         } catch (IOException e) {
             saveConfig();
