@@ -12,7 +12,7 @@
   "config.tradeloot.require_player.tooltip": "是否仅玩家击杀才掉落物品",
   "config.tradeloot.drops_chance.tooltip": "每个交易栏位的掉落几率(添加'tradeloot:prevent_tradeloot' tag 的物品不会掉落)",
   "config.tradeloot.looting_Bonus.tooltip": "每级击掠夺附魔所增加的掉落几率",
-  "config.tradeloot.dropsBonus.tooltip": "每级击掠夺附魔所增加的最大物品数量",
+  "config.tradeloot.dropsBonus.tooltip": "每级击掠夺附魔所增加的额外物品数量",
   "config.tradeloot.dropsNumber.tooltip": "每个村民等级所能掉落的最大物品数量 (设为 '0' 为无限)",
   "config.tradeloot.add_Inventory.tooltip": "在每次交易之后将这一次交易消耗的物品加入村民的物品栏",
   "config.tradeloot.invDrops_Chance.tooltip": "村民物品栏的掉落几率",
