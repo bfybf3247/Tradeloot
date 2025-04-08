@@ -24,7 +24,7 @@ public class Config {
 
             enableVillagerDrops = Boolean.parseBoolean(props.getProperty("enableVillagerDrops", "true"));
             dropsChance = Double.parseDouble(props.getProperty("dropsChance", "0.25"));
-            lootingBonus = Double.parseDouble(props.getProperty("lootingBonus", "0.05"));
+            lootingBonus = Double.parseDouble(props.getProperty("lootingBonus", "0.15"));
             dropsBonus = Integer.parseInt(props.getProperty("dropsBonus", "1"));
             dropsNumber = Integer.parseInt(props.getProperty("dropsNumber", "2"));
             addInventory = Boolean.parseBoolean(props.getProperty("addInventory", "false"));

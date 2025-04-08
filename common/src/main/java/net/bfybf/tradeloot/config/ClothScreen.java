@@ -37,12 +37,6 @@ public class ClothScreen {
                 .setTooltip(Component.translatable("config.tradeloot.drops_chance.tooltip"))
                 .build());
 
-        general.addEntry(entryBuilder.startDoubleField(Component.translatable("config.tradeloot.looting_Bonus"), Config.lootingBonus)
-                .setDefaultValue(0.05)
-                .setSaveConsumer(value -> Config.lootingBonus = value)
-                .setTooltip(Component.translatable("config.tradeloot.looting_Bonus.tooltip"))
-                .build());
-
         general.addEntry(entryBuilder.startIntField(Component.translatable("config.tradeloot.dropsNumber"), Config.dropsNumber)
                 .setDefaultValue(2)
                 .setSaveConsumer(value -> Config.dropsNumber = value)
@@ -53,6 +47,12 @@ public class ClothScreen {
                 .setDefaultValue(1)
                 .setSaveConsumer(value -> Config.dropsBonus = value)
                 .setTooltip(Component.translatable("config.tradeloot.dropsBonus.tooltip"))
+                .build());
+
+        general.addEntry(entryBuilder.startDoubleField(Component.translatable("config.tradeloot.looting_Bonus"), Config.lootingBonus)
+                .setDefaultValue(0.15)
+                .setSaveConsumer(value -> Config.lootingBonus = value)
+                .setTooltip(Component.translatable("config.tradeloot.looting_Bonus.tooltip"))
                 .build());
 
         general.addEntry(entryBuilder.startBooleanToggle(Component.translatable("config.tradeloot.add_Inventory"), Config.addInventory)
