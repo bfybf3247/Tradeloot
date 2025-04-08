@@ -104,19 +104,20 @@ public class VillagerDeathEvent {
                     }
 
                     int bonusdrop = lootinglevel * Config.dropsBonus;
-                    double dropChance = Math.min(Config.dropsChance + lootinglevel * Config.lootingBonus, 1);
+                    double dropChance = Math.min(Config.dropsChance, 1);
+                    double lootingChance = Math.min(Config.lootingBonus, 1);
 
                     for (MerchantOffer offer : offers) {
                         ItemStack itemStack = offer.getResult().copy();
                         if (offer.isOutOfStock() || itemStack.is(NOTARDELOOT)) continue;
-                        if (Config.dropsNumber == 0 || drops < villagerlevel * Config.dropsNumber) {
+                        if (Config.dropsNumber == -1 || drops < villagerlevel * Config.dropsNumber) {
                             if (level.random.nextDouble() < dropChance) {
                                 ItemEntity itemEntity = new ItemEntity(level, entity.getX(), entity.getY() + 1, entity.getZ(), itemStack);
                                 level.addFreshEntity(itemEntity);
                                 drops += 1;
                             }
                         }
-                        if(bonusdrop > 0 && level.random.nextDouble() < dropChance){
+                        if(bonusdrop > 0 && level.random.nextDouble() < lootingChance){
                             ItemEntity itemEntity = new ItemEntity(level, entity.getX(), entity.getY() + 1, entity.getZ(), itemStack);
                             level.addFreshEntity(itemEntity);
                             bonusdrop -= 1;
