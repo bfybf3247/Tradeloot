@@ -18,5 +18,4 @@ Enables villagers to drop loot upon death, including their trades and inventory 
 - Mod Menu (optional)
 
 ### Alternatives
-- Pillagers Mod - 1.16 & 1.12
-- https://github.com/Darkhax-Minecraft/Pillagers
+- [Pillagers Mod - 1.16 & 1.12](https://github.com/Darkhax-Minecraft/Pillagers)
