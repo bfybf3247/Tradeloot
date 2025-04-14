@@ -1,3 +1,4 @@
+
 package net.bfybf.tradeloot.config;
 
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
@@ -5,6 +6,8 @@ import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+
+import java.util.Arrays;
 
 public class ClothScreen {
 
@@ -70,6 +73,41 @@ public class ClothScreen {
         general.addEntry(entryBuilder.startDoubleField(Component.translatable("config.tradeloot.PotatoChance"), Config.PotatoChance)
                 .setDefaultValue(0.002)
                 .setSaveConsumer(value -> Config.PotatoChance = value)
+                .setTooltip(Component.translatable("config.tradeloot.PotatoChance.tooltip"))
+                .build());
+
+        general.addEntry(entryBuilder.startStrList(Component.translatable("config.tradeloot.Potatoes"), Config.Potatoes)
+                .setDefaultValue(Arrays.asList(
+                        "minecraft:potato",
+                        "minecraft:poisonous_potato",
+                        "minecraft:pufferfish",
+                        "minecraft:rotten_flesh",
+                        "minecraft:spider_eye",
+                        "minecraft:diorite",
+                        "minecraft:lead",
+                        "minecraft:book",
+                        "minecraft:knowledge_book",
+                        "minecraft:netherite_ingot"
+                ))
+                .setSaveConsumer(value -> Config.Potatoes = value)
+                .setTooltip(Component.translatable("config.tradeloot.Potatoes.tooltip"))
+                .build());
+
+        general.addEntry(entryBuilder.startStrList(Component.translatable("config.tradeloot.Apples"), Config.Apples)
+                .setDefaultValue(Arrays.asList(
+                        "item.minecraft.apple",
+                        "item.minecraft.golden_apple",
+                        "item.minecraft.enchanted_golden_apple",
+                        "item.minecraft.cooked_beef",
+                        "item.minecraft.ender_eye",
+                        "block.minecraft.diorite",
+                        "entity.minecraft.wandering_trader",
+                        "enchantment.minecraft.mending",
+                        "lectern.take_book",
+                        "item.minecraft.nether_brick"
+                ))
+                .setSaveConsumer(value -> Config.Apples = value)
+                .setTooltip(Component.translatable("config.tradeloot.Apples.tooltip"))
                 .build());
 
         return builder.build();

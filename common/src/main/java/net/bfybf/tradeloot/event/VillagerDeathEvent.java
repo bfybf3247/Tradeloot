@@ -4,7 +4,9 @@ import dev.architectury.event.EventResult;
 import dev.architectury.event.events.common.EntityEvent;
 import net.bfybf.tradeloot.config.Config;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -68,33 +70,30 @@ public class VillagerDeathEvent {
 
                         if (realvillager.getVillagerData().getProfession() == VillagerProfession.NITWIT && killer instanceof Player) {
                             if (level.random.nextDouble() < Config.PotatoChance) {
-                                Item[] potatos = {
-                                        Items.POTATO,
-                                        Items.POISONOUS_POTATO,
-                                        Items.PUFFERFISH,
-                                        Items.ROTTEN_FLESH,
-                                        Items.SPIDER_EYE,
-                                        Items.DIORITE,
-                                        Items.LEAD,
-                                        Items.BOOK,
-                                        Items.KNOWLEDGE_BOOK,
-                                        Items.NETHERITE_INGOT
-                                };
-                                String[] apples = {
-                                        "item.minecraft.apple",
-                                        "item.minecraft.golden_apple",
-                                        "item.minecraft.enchanted_golden_apple",
-                                        "item.minecraft.cooked_beef",
-                                        "item.minecraft.ender_eye",
-                                        "block.minecraft.diorite",
-                                        "entity.minecraft.wandering_trader",
-                                        "enchantment.minecraft.mending",
-                                        "lectern.take_book",
-                                        "item.minecraft.nether_brick"
-                                };
-                                int seed = level.random.nextInt(potatos.length);
-                                ItemStack potato = new ItemStack(potatos[seed], 1);
-                                potato.set(DataComponents.CUSTOM_NAME, Component.translatable(apples[seed]));
+                                Item potatoitem;
+                                String appletext;
+
+                                try {
+                                    Item[] potatoes = Config.Potatoes.stream()
+                                            .map(itemId -> BuiltInRegistries.ITEM.get(ResourceLocation.tryParse(itemId)))
+                                            .toArray(Item[]::new);
+                                    String[] apples = Config.Apples.toArray(new String[0]);
+                                    int validLength = Math.min(potatoes.length, apples.length);
+                                    if (validLength > 0) {
+                                        int seed = level.random.nextInt(validLength);
+                                        potatoitem = potatoes[seed];
+                                        appletext = apples[seed];
+                                    } else {
+                                        potatoitem = Items.POTATO;
+                                        appletext = "item.minecraft.apple";
+                                    }
+                                } catch (Exception e) {
+                                    potatoitem = Items.POTATO;
+                                    appletext = "item.minecraft.apple";
+                                }
+
+                                ItemStack potato = new ItemStack(potatoitem, 1);
+                                potato.set(DataComponents.CUSTOM_NAME, Component.translatable(appletext));
                                 ItemEntity apple = new ItemEntity(level, entity.getX(), entity.getY() + 1, entity.getZ(), potato);
                                 apple.setCustomName(apple.getItem().getHoverName());
                                 apple.setCustomNameVisible(true);
