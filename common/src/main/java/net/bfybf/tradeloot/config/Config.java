@@ -78,6 +78,8 @@ public class Config {
         props.setProperty("addInventory", String.valueOf(addInventory));
         props.setProperty("invDropsChance", String.valueOf(invDropsChance));
         props.setProperty("potatoChance", String.valueOf(PotatoChance));
+        props.setProperty("Potatoes", String.valueOf(Potatoes));
+        props.setProperty("Apples", String.valueOf(Apples));
 
         try (OutputStream os = new FileOutputStream(configFile)) {
             props.store(os, "Tradeloot Config");
