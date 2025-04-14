@@ -16,5 +16,13 @@
   "config.tradeloot.dropsNumber.tooltip": "每个村民等级所能掉落的最大物品数量 (设为 '-1' 为无限)",
   "config.tradeloot.add_Inventory.tooltip": "在每次交易之后将这一次交易消耗的物品加入村民的物品栏",
   "config.tradeloot.invDrops_Chance.tooltip": "村民物品栏的掉落几率",
-  "config.tradeloot.PotatoChance": "土豆率"
+
+  "config.tradeloot.PotatoChance": "特殊掉落几率",
+  "config.tradeloot.PotatoChance.tooltip": "傻子村民特殊掉落的掉落几率",
+
+  "config.tradeloot.Potatoes": "特殊掉落物品",
+  "config.tradeloot.Potatoes.tooltip": "傻子村民特殊掉落的物品 (与'特殊掉落名称'对照)",
+
+  "config.tradeloot.Apples": "特殊掉落名称",
+  "config.tradeloot.Apples.tooltip": "傻子村民特殊掉落的物品的名称 (与'特殊掉落物品'对照)"
 }

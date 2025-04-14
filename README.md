@@ -10,7 +10,7 @@ Enables villagers to drop loot upon death, including their trades and inventory 
 - **Add to Inventory**: Include traded items in the villager's inventory after trading.
 - **Inventory Drop Chance**: Chance for villagers to drop items from their inventory.
 - **Exclusion Tag**: Items with the "tradeloot:prevent_tradeloot" tag are excluded from drops.
-- **PotatoChance**: The Nitwit's Secret.
+- **Special Drops Chance**: The Nitwit's Secret.
 
 ### Requires
 - Architectury API
