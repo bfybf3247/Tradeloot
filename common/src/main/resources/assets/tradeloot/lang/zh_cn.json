@@ -24,5 +24,20 @@
   "config.tradeloot.Potatoes.tooltip": "傻子村民特殊掉落的物品 (与'特殊掉落名称'对照)",
 
   "config.tradeloot.Apples": "特殊掉落名称",
-  "config.tradeloot.Apples.tooltip": "傻子村民特殊掉落的物品的名称 (与'特殊掉落物品'对照)"
+  "config.tradeloot.Apples.tooltip": "傻子村民特殊掉落的物品的名称 (与'特殊掉落物品'对照)",
+
+  "config.tradeloot.BabyPenaltyMultiplier": "小村民惩罚倍率",
+  "config.tradeloot.BabyPenaltyMultiplier.tooltip": "击杀小村民增加惩罚几率的倍数",
+
+  "config.tradeloot.PenaltyChance": "惩罚几率",
+  "config.tradeloot.PenaltyChance.tooltip": "击杀村民导致惩罚的几率",
+
+  "config.tradeloot.PunishLightingWeight": "闪电惩罚权重",
+  "config.tradeloot.PunishLightingWeight.tooltip": "召唤闪电惩罚的权重",
+
+  "config.tradeloot.PunishIronManWeight": "铁傀儡惩罚权重",
+  "config.tradeloot.PunishIronManWeight.tooltip": "召唤铁傀儡惩罚的权重",
+
+  "config.tradeloot.PunishJohnnyWeight": "Johnny惩罚权重",
+  "config.tradeloot.PunishJohnnyWeight.tooltip": "召唤卫道士惩罚的权重"
 }

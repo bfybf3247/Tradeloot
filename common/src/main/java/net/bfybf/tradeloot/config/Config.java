@@ -20,6 +20,11 @@ public class Config {
     public static double PotatoChance;
     public static List<String> Potatoes;
     public static List<String> Apples;
+    public static double BabyPenaltyMultiplier;
+    public static double PenaltyChance;
+    public static double PunishLightingWeight;
+    public static double PunishIronManWeight;
+    public static double PunishJohnnyWeight;
 
     public static void loadConfig(File file) {
         Properties props = new Properties();
@@ -34,8 +39,12 @@ public class Config {
             dropsNumber = Integer.parseInt(props.getProperty("dropsNumber", "2"));
             addInventory = Boolean.parseBoolean(props.getProperty("addInventory", "false"));
             invDropsChance = Double.parseDouble(props.getProperty("invDropsChance", "0.25"));
+            PenaltyChance = Double.parseDouble(props.getProperty("PenaltyChance", "0.10"));
+            BabyPenaltyMultiplier = Double.parseDouble(props.getProperty("BabyPenaltyMultiplier", "10.00"));
+            PunishLightingWeight = Double.parseDouble(props.getProperty("PunishLightingWeight", "0.33"));
+            PunishIronManWeight = Double.parseDouble(props.getProperty("PunishIronManWeight", "0.33"));
+            PunishJohnnyWeight = Double.parseDouble(props.getProperty("PunishJohnnyWeight", "0.33"));
             PotatoChance = Double.parseDouble(props.getProperty("potatoChance", "0.02"));
-
             Potatoes = Arrays.asList(
                     "minecraft:potato",
                     "minecraft:poisonous_potato",
@@ -78,6 +87,13 @@ public class Config {
         props.setProperty("addInventory", String.valueOf(addInventory));
         props.setProperty("invDropsChance", String.valueOf(invDropsChance));
         props.setProperty("potatoChance", String.valueOf(PotatoChance));
+        props.setProperty("Potatoes", String.valueOf(Potatoes));
+        props.setProperty("Apples", String.valueOf(Apples));
+        props.setProperty("BabyPenaltyMultiplier", String.valueOf(BabyPenaltyMultiplier));
+        props.setProperty("PenaltyChance", String.valueOf(PenaltyChance));
+        props.setProperty("PunishLightingWeight", String.valueOf(PunishLightingWeight));
+        props.setProperty("PunishIronManWeight", String.valueOf(PunishIronManWeight));
+        props.setProperty("PunishJohnnyWeight", String.valueOf(PunishJohnnyWeight));
 
         try (OutputStream os = new FileOutputStream(configFile)) {
             props.store(os, "Tradeloot Config");
