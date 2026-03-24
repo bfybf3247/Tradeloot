@@ -31,5 +31,20 @@
   "config.tradeloot.Potatoes.tooltip": "Items of nitwit villager special drops (Should match 'Special Names')",
 
   "config.tradeloot.Apples": "Special Names",
-  "config.tradeloot.Apples.tooltip": "Names of nitwit villager special drops (Should match 'Special Items')"
+  "config.tradeloot.Apples.tooltip": "Names of nitwit villager special drops (Should match 'Special Items')",
+
+  "config.tradeloot.BabyPenaltyMultiplier": "Baby Penalty Multiplier",
+  "config.tradeloot.BabyPenaltyMultiplier.tooltip": "Multiplier for penalty chance when killing baby villager",
+
+  "config.tradeloot.PenaltyChance": "Penalty Chance",
+  "config.tradeloot.PenaltyChance.tooltip": "Chance to trigger punishment when killing adult villager",
+
+  "config.tradeloot.PunishLightingWeight": "Punish Lighting Weight",
+  "config.tradeloot.PunishLightingWeight.tooltip": "Weight for lightning punishment",
+
+  "config.tradeloot.PunishIronManWeight": "PunishIronManWeight",
+  "config.tradeloot.PunishIronManWeight.tooltip": "Weight for iron golem punishment",
+
+  "config.tradeloot.PunishJohnnyWeight": "Punish Johnny Weight",
+  "config.tradeloot.PunishJohnnyWeight.tooltip": "Weight for Johnny vindicator punishment"
 }

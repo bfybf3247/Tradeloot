@@ -75,6 +75,36 @@ public class ClothScreen {
                 .setTooltip(Component.translatable("config.tradeloot.PotatoChance.tooltip"))
                 .build());
 
+        general.addEntry(entryBuilder.startDoubleField(Component.translatable("config.tradeloot.PenaltyChance"), Config.PenaltyChance)
+                .setDefaultValue(0.10)
+                .setSaveConsumer(value -> Config.PenaltyChance = value)
+                .setTooltip(Component.translatable("config.tradeloot.PenaltyChance.tooltip"))
+                .build());
+
+        general.addEntry(entryBuilder.startDoubleField(Component.translatable("config.tradeloot.BabyPenaltyMultiplier"), Config.BabyPenaltyMultiplier)
+                .setDefaultValue(10.00)
+                .setSaveConsumer(value -> Config.BabyPenaltyMultiplier = value)
+                .setTooltip(Component.translatable("config.tradeloot.BabyPenaltyMultiplier.tooltip"))
+                .build());
+
+        general.addEntry(entryBuilder.startDoubleField(Component.translatable("config.tradeloot.PunishLightingWeight"), Config.PunishLightingWeight)
+                .setDefaultValue(0.33)
+                .setSaveConsumer(value -> Config.PunishLightingWeight = value)
+                .setTooltip(Component.translatable("config.tradeloot.PunishLightingWeight.tooltip"))
+                .build());
+
+        general.addEntry(entryBuilder.startDoubleField(Component.translatable("config.tradeloot.PunishIronManWeight"), Config.PunishIronManWeight)
+                .setDefaultValue(0.33)
+                .setSaveConsumer(value -> Config.PunishIronManWeight = value)
+                .setTooltip(Component.translatable("config.tradeloot.PunishIronManWeight.tooltip"))
+                .build());
+
+        general.addEntry(entryBuilder.startDoubleField(Component.translatable("config.tradeloot.PunishJohnnyWeight"), Config.PunishJohnnyWeight)
+                .setDefaultValue(0.33)
+                .setSaveConsumer(value -> Config.PunishJohnnyWeight = value)
+                .setTooltip(Component.translatable("config.tradeloot.PunishJohnnyWeight.tooltip"))
+                .build());
+
         general.addEntry(entryBuilder.startStrList(Component.translatable("config.tradeloot.Potatoes"), Config.Potatoes)
                 .setDefaultValue(Arrays.asList(
                         "minecraft:potato",
