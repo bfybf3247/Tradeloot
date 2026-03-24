@@ -94,7 +94,6 @@ public class Config {
         props.setProperty("PunishLightingWeight", String.valueOf(PunishLightingWeight));
         props.setProperty("PunishIronManWeight", String.valueOf(PunishIronManWeight));
         props.setProperty("PunishJohnnyWeight", String.valueOf(PunishJohnnyWeight));
-
         try (OutputStream os = new FileOutputStream(configFile)) {
             props.store(os, "Tradeloot Config");
         } catch (IOException e) {

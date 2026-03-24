@@ -6,7 +6,9 @@ import net.bfybf.tradeloot.config.Config;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -29,7 +31,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraft.world.level.GameRules;
@@ -41,17 +42,6 @@ import static net.bfybf.tradeloot.Tradeloot.NOTARDELOOT;
 import static net.minecraft.world.entity.EntityType.VINDICATOR;
 
 public class VillagerDeathEvent {
-
-    private enum PunishmentType {
-        LIGHTNING(Config.PunishLightingWeight),
-        IRON_GOLEM(Config.PunishIronManWeight),
-        VINDICATOR(Config.PunishJohnnyWeight);
-
-        final double weight;
-        PunishmentType(double weight) {
-            this.weight = weight;
-        }
-    }
 
     public VillagerDeathEvent() {
         EntityEvent.LIVING_DEATH.register((entity, source) -> {
@@ -69,15 +59,23 @@ public class VillagerDeathEvent {
                 if (killer instanceof Player player) {
                     applyPunishment(level, villager, player);
                 }
-                int lootinglevel = (killer != null) ? EnchantmentHelper.getItemEnchantmentLevel(Enchantments.LOOTING, killer.getMainHandItem()) : 0;
-
+                int lootingLevel = (killer != null)
+                        ? EnchantmentHelper.getItemEnchantmentLevel(
+                        killer.registryAccess()
+                                .registryOrThrow(Registries.ENCHANTMENT)
+                                .getHolder(ResourceKey.create(Registries.ENCHANTMENT,
+                                        net.minecraft.resources.ResourceLocation.parse("looting")))
+                                .orElse(null),
+                        killer.getMainHandItem()
+                )
+                        : 0;
                 if (villager instanceof Villager realvillager) {
                     int villagerlevel = realvillager.getVillagerData().getLevel();
                     dropInventoryItems(level, entity, realvillager);
                     dropPotatoForNitwit(level, entity, realvillager, killer);
-                    dropTradeItems(level, entity, realvillager.getOffers(), villagerlevel, lootinglevel);
+                    dropTradeItems(level, entity, realvillager.getOffers(), villagerlevel, lootingLevel);
                 } else {
-                    dropTradeItems(level, entity, villager.getOffers(), 1, lootinglevel);
+                    dropTradeItems(level, entity, villager.getOffers(), 1, lootingLevel);
                 }
             }
 
@@ -226,6 +224,18 @@ public class VillagerDeathEvent {
                 level.addFreshEntity(itemEntity);
                 bonusdrop -= 1;
             }
+        }
+    }
+
+    private enum PunishmentType {
+        LIGHTNING(Config.PunishLightingWeight),
+        IRON_GOLEM(Config.PunishIronManWeight),
+        VINDICATOR(Config.PunishJohnnyWeight);
+
+        final double weight;
+
+        PunishmentType(double weight) {
+            this.weight = weight;
         }
     }
 }
